@@ -21,7 +21,7 @@ public class GrafoGenerator {
 		for (int i = 0; i < cantNodos - 1; i++) {
 			for (int j = i + 1; j < cantNodos; j++) {
 				if (rand.nextFloat() < probabilidad) {
-					if(i < j)
+					if (i < j)
 						array.add(new ParDeNodos(i, j));
 					else
 						array.add(new ParDeNodos(j, i));
@@ -46,14 +46,14 @@ public class GrafoGenerator {
 		int cantAristas = 0;
 		for (int i = 0; i < cantNodos - 1; i++) {
 			for (int j = i + 1; j < cantNodos; j++) {
-				if(i < j)
+				if (i < j)
 					random.add(new RandomParDeNodos(new ParDeNodos(i, j), rand.nextDouble()));
 				else
 					random.add(new RandomParDeNodos(new ParDeNodos(j, i), rand.nextDouble()));
-				
+
 			}
 		}
-		
+
 		Collections.sort(random);
 
 		for (int i = 0; i < cantMaximaAristas * porcentaje; i++) {
@@ -74,15 +74,15 @@ public class GrafoGenerator {
 		int cantMaximaAristas = (cantNodos * (cantNodos - 1)) / 2;
 		int salto = 0;
 		int j = 0;
-		
+
 		int nodo1;
 		int nodo2;
-		
+
 		if (grado % 2 != 0 && cantNodos % 2 != 0) {
 			System.out.println("No se puede generar un grafo regular de grado impar con N impar");
 			return;
 		}
-		if(grado >= cantNodos) {
+		if (grado >= cantNodos) {
 			System.out.println("El grado no puede ser igual, o mayor a la cantidad de nodos");
 			return;
 		}
@@ -91,7 +91,7 @@ public class GrafoGenerator {
 			for (int i = 0; i < cantNodos / 2; i++) {
 				nodo1 = i;
 				nodo2 = i + cantNodos / 2;
-				if(nodo1 < nodo2)
+				if (nodo1 < nodo2)
 					array.add(new ParDeNodos(nodo1, nodo2));
 				else
 					array.add(new ParDeNodos(nodo2, nodo1));
@@ -104,16 +104,15 @@ public class GrafoGenerator {
 				salto = gradoActual / 2;
 				j = 0;
 				for (int i = 0; i < cantNodos; i++) {
-					if(i + salto < cantNodos) {
+					if (i + salto < cantNodos) {
 						nodo1 = i;
 						nodo2 = i + salto;
-						if(nodo1 < nodo2)
+						if (nodo1 < nodo2)
 							array.add(new ParDeNodos(nodo1, nodo2));
 						else
 							array.add(new ParDeNodos(nodo2, nodo1));
-					}
-					else {
-						if(i < j)
+					} else {
+						if (i < j)
 							array.add(new ParDeNodos(i, j));
 						else
 							array.add(new ParDeNodos(j, i));
@@ -132,46 +131,55 @@ public class GrafoGenerator {
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());
 	}
-	
+
 	public static void regularConPorcentajeAdyacencia(int cantNodos, double porcentaje) throws IOException {
-		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
+		int cantMaximaAristas = (cantNodos * (cantNodos - 1)) / 2;
 		int grado = (int) Math.ceil(((porcentaje * cantMaximaAristas) / (cantNodos / 2)));
-		double minimo = (double) (cantNodos/2) / cantMaximaAristas;
-		
-		if(porcentaje < minimo) {
-			System.out.println("El porcentaje de adyacencia ingresado es demasiado bajo para generar un grafo regular (el minimo es: " + String.format("%1.3f", minimo) + ")");
+		double minimo = (double) (cantNodos / 2) / cantMaximaAristas;
+
+		if (porcentaje < minimo) {
+			System.out.println(
+					"El porcentaje de adyacencia ingresado es demasiado bajo para generar un grafo regular (el minimo es: "
+							+ String.format("%1.3f", minimo) + ")");
 			System.exit(1);
 		}
-		if(porcentaje > 1) {
+		if (porcentaje > 1) {
 			System.out.println("El porcentaje de adyacencia ingresado es superior al 100%");
 			System.exit(1);
 		}
-		
+
 		regularConGrado(cantNodos, grado);
 	}
-	
+
 	public static void nPartito(int cantNodos, int cantConjuntos) throws IOException {
 		ArrayList<ParDeNodos> array = new ArrayList<ParDeNodos>();
 		ArrayList<Integer> conjuntos = new ArrayList<Integer>();
 		Random rand = new Random();
 		int random;
-		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
+		int cantMaximaAristas = (cantNodos * (cantNodos - 1)) / 2;
 		int cantAristas = 0;
-		
-		if(cantConjuntos > cantNodos) {
+
+		if (cantConjuntos > cantNodos) {
 			System.out.println("La cantidad de conjuntos no puede ser mayor a la cantidad de nodos");
 			System.exit(1);
 		}
-		
-		for(int i = 0 ; i < cantNodos ; i++) {
+
+		for (int i = 0; i < cantConjuntos; i++) {
+			conjuntos.add(i);
+		}
+
+		for (int i = 0; i < (cantNodos - cantConjuntos); i++) {
 			random = rand.nextInt(cantConjuntos);
 			conjuntos.add(random);
 		}
-		
-		for(int i = 0 ; i < cantNodos - 1 ; i++) {
-			for(int j = i + 1 ; j < cantNodos ; j++) {
-				if(conjuntos.get(i) != conjuntos.get(j)) { // Si el nodo1 y el nodo2 están en conjuntos diferentes
-					if(i < j)
+
+		for (int i = 0; i < cantNodos - 1; i++) {
+			for (int j = i + 1; j < cantNodos; j++) {
+				if (conjuntos.get(i) != conjuntos.get(j)) { // Si el nodo1 y el
+															// nodo2 están en
+															// conjuntos
+															// diferentes
+					if (i < j)
 						array.add(new ParDeNodos(i, j));
 					else
 						array.add(new ParDeNodos(j, i));
@@ -179,11 +187,11 @@ public class GrafoGenerator {
 				}
 			}
 		}
-		
+
 		ParDeNodos grados = calcularGrado(array, cantNodos);
 		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
 		String path = cantConjuntos + "_PARTITO" + ".txt";
-		
+
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());
 	}
@@ -194,7 +202,7 @@ public class GrafoGenerator {
 		int gradoMinimo = Integer.MAX_VALUE;
 		int max = 0;
 		int min = 0;
-		
+
 		for (int i = 0; i < cantNodos; i++)
 			grados[i] = 0;
 
@@ -245,7 +253,7 @@ public class GrafoGenerator {
 			System.out.println("El grafo generado tiene 0 como grado mínimo, genere un nuevo grafo...");
 			System.exit(0);
 		}
-			
+
 	}
 
 	private static class RandomParDeNodos implements Comparable<RandomParDeNodos> {
@@ -278,5 +286,5 @@ public class GrafoGenerator {
 			return 0;
 		}
 	}
-	
+
 }

@@ -127,7 +127,7 @@ public class GrafoNDNP {
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 			
-			this.mejoresColores[this.colorMax]++;
+			this.mejoresColores[this.colorMax - 1]++;
 		}
 		
 		this.escribirSolucion("SECUENCIAL");
@@ -158,7 +158,7 @@ public class GrafoNDNP {
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 			
-			this.mejoresColores[this.colorMax]++;
+			this.mejoresColores[this.colorMax - 1]++;
 		}
 		
 		this.escribirSolucion("WELSH-POWELL");
@@ -190,7 +190,7 @@ public class GrafoNDNP {
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 			
-			this.mejoresColores[this.colorMax]++;
+			this.mejoresColores[this.colorMax - 1]++;
 		}
 		
 		this.escribirSolucion("MATULA");

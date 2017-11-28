@@ -9,29 +9,30 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
-		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(600, 0.9);
-		//GrafoGenerator.regularConGrado(8, 3);
-		//GrafoGenerator.regularConPorcentajeAdyacencia(1000, 0.50);
-		//GrafoGenerator.nPartito(4, 5);
+		//GrafoGenerator.aleatorioConProbabilidad(100, 0.5);
+		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(100, 0.9);
+		//GrafoGenerator.regularConGrado(50, 3);
+		//GrafoGenerator.regularConPorcentajeAdyacencia(100, 0.50);
+		//GrafoGenerator.nPartito(6, 2);
 		
-		GrafoNDNP grafo = new GrafoNDNP("grafo.in");
+		//GrafoNDNP grafo = new GrafoNDNP("grafo.in");
 
-		//grafo.coloreoSecuencial(10000);
+		//grafo.coloreoSecuencial(10);
 		//grafo.coloreoWelshPowell(10000);
 		//grafo.coloreoMatula(10000);
 		
-		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
+		//ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
 		
 		//System.out.println("ENTRADA: ");
 		//probador.mostrarEntrada();
 		//System.out.println("SALIDA: ");
 		//probador.mostrarSalida();
 		//System.out.println();
-		
+		/*
 		if(probador.probar())
 			System.out.println("TODO OK");
 		else
-			System.out.println("SALIDA NO VÃ?LIDA");
+			System.out.println("SALIDA NO Vï¿½?LIDA");
+		*/
 	}
 }
